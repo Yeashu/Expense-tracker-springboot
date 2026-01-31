@@ -19,7 +19,7 @@ spring:
   # Cache Configuration
   cache:
     type: simple
-    cache-names: expenses
+    cache-names: expenses, exchangeRates
 
 # Swagger/OpenAPI Configuration
 springdoc:
@@ -42,3 +42,13 @@ rate-limit:
   general-requests-per-minute: 30
   # Time window in minutes
   time-window-minutes: 1
+
+# Currency Configuration
+currency:
+  api:
+    # Free tier API: https://api.exchangerate-api.com/v4/latest/{base}
+    # No API key required for free tier
+    url: https://api.exchangerate-api.com/v4
+    key: ""
+  # Base currency for the application
+  base: INR

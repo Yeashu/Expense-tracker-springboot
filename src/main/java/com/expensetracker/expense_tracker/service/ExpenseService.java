@@ -59,11 +59,6 @@ public class ExpenseService {
                 .build();
     }
 
-    /**
-     * Retrieves all expenses for the authenticated user.
-     * Results are cached to improve performance for read-heavy operations.
-     * Cache key is based on authenticated user's email.
-     */
     @Cacheable(value = "expenses", key = "T(org.springframework.security.core.context.SecurityContextHolder).getContext().getAuthentication().name")
     public List<ExpenseResponse> getExpenses(){
         User user = getAuthenticatedUser();
@@ -82,7 +77,7 @@ public class ExpenseService {
         Expense expense = expenseRepo.findById(expenseId)
                 .orElseThrow(() -> new ResourceNotFoundException("Expense not found with id: " + expenseId));
 
-        if(!expense.getUser().getId().equals(user.getId())){
+        if (!expense.getUser().getId().equals(user.getId())) {
             throw new UnauthorizedException("You are not allowed to update this expense");
         }
 
@@ -102,14 +97,12 @@ public class ExpenseService {
         Expense expense = expenseRepo.findById(expenseId)
                 .orElseThrow(() -> new ResourceNotFoundException("Expense not found with id: " + expenseId));
 
-        if(!expense.getUser().getId().equals(user.getId())){
+        if (!expense.getUser().getId().equals(user.getId())) {
             throw new UnauthorizedException("You are not allowed to delete this expense");
         }
 
         expenseRepo.delete(expense);
     }
-
-
 
     private ExpenseResponse mapToResponse(Expense expense) {
         return ExpenseResponse.builder()

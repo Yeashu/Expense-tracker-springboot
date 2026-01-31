@@ -8,9 +8,6 @@ import com.expensetracker.expense_tracker.ratelimit.RateLimitInterceptor;
 
 import lombok.RequiredArgsConstructor;
 
-/**
- * Web MVC configuration to register interceptors.
- */
 @Configuration
 @RequiredArgsConstructor
 public class WebMvcConfig implements WebMvcConfigurer {

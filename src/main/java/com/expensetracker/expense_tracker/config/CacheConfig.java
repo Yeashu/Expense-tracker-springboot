@@ -8,11 +8,6 @@ import org.springframework.cache.concurrent.ConcurrentMapCacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-/**
- * Cache configuration using in-memory ConcurrentMapCache.
- * Suitable for single-instance deployments.
- * For distributed systems, consider Redis or Hazelcast.
- */
 @Configuration
 @EnableCaching
 public class CacheConfig {
@@ -20,7 +15,7 @@ public class CacheConfig {
     @Bean
     public CacheManager cacheManager() {
         ConcurrentMapCacheManager cacheManager = new ConcurrentMapCacheManager();
-        cacheManager.setCacheNames(Arrays.asList("expenses"));
+        cacheManager.setCacheNames(Arrays.asList("expenses", "exchangeRates"));
         return cacheManager;
     }
 }

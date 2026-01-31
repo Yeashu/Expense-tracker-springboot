@@ -23,5 +23,5 @@ public class ErrorResponse {
     private String error;
     private String message;
     private String path;
-    private Map<String, String> validationErrors; // For validation errors
+    private Map<String, String> validationErrors;
 }

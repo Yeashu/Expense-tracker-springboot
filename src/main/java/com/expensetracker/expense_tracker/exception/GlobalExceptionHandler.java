@@ -1,7 +1,6 @@
 package com.expensetracker.expense_tracker.exception;
 
 import java.time.LocalDateTime;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -11,7 +10,6 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import org.springframework.web.context.request.WebRequest;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -88,7 +86,7 @@ public class GlobalExceptionHandler {
                         error -> error.getDefaultMessage() != null 
                                 ? error.getDefaultMessage() 
                                 : "Invalid value",
-                        (existing, replacement) -> existing // Handle duplicate keys
+                        (existing, replacement) -> existing
                 ));
 
         ErrorResponse errorResponse = ErrorResponse.builder()
@@ -128,7 +126,6 @@ public class GlobalExceptionHandler {
                 .path(request.getRequestURI())
                 .build();
 
-        // Log the actual exception for debugging (in production, use proper logging)
         ex.printStackTrace();
 
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
