@@ -15,6 +15,11 @@ spring:
   h2:
     console:
       enabled: true
+  
+  # Cache Configuration
+  cache:
+    type: simple
+    cache-names: expenses, exchangeRates
 
 # Swagger/OpenAPI Configuration
 springdoc:
@@ -26,3 +31,24 @@ springdoc:
     operations-sorter: method
     tags-sorter: alpha
     try-it-out-enabled: true
+
+# Rate Limiting Configuration
+rate-limit:
+  # Authentication endpoints (register/login) - stricter limits
+  auth-requests-per-minute: 5
+  # Expense creation endpoint
+  expense-creation-requests-per-minute: 10
+  # General API endpoints
+  general-requests-per-minute: 30
+  # Time window in minutes
+  time-window-minutes: 1
+
+# Currency Configuration
+currency:
+  api:
+    # Free tier API: https://api.exchangerate-api.com/v4/latest/{base}
+    # No API key required for free tier
+    url: https://api.exchangerate-api.com/v4
+    key: ""
+  # Base currency for the application
+  base: INR
